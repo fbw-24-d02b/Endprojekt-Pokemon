@@ -46,6 +46,31 @@ inquirer
             console.log(`You choose ${pokemonOne}.Lets Go!`);
             const enemie = randomEnemie(pokemon);
             console.log(`Your Enemie is: ${enemie}`);
+            inquirer.prompt([
+              {
+                type: "list",
+                message: "Which attack do you choose?",
+                name: "attackChoose",
+                choices: [
+                  starterPokemon[0].attacks[0].attack +
+                    ": " +
+                    starterPokemon[0].attacks[0].damage +
+                    " damage",
+                  starterPokemon[0].attacks[1].attack +
+                    ": " +
+                    starterPokemon[0].attacks[1].damage +
+                    " damage",
+                  starterPokemon[0].attacks[2].attack +
+                    ": " +
+                    starterPokemon[0].attacks[2].damage +
+                    " damage",
+                  starterPokemon[0].attacks[3].attack +
+                    ": " +
+                    starterPokemon[0].attacks[3].damage +
+                    " damage",
+                ],
+              },
+            ]);
           } else if (selectPokemon === "Bulbasaur") {
             //display pokemon info for two
             let pokemonTwo = starterPokemon[1].name;
