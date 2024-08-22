@@ -1,5 +1,7 @@
 import inquirer from "inquirer";
-// import { Schiggy, Bisasam, Glumanda } from "./starterpokemon.js";
+import { starterPokemon } from "./data/starter.js";
+import { randomEnemie } from "./randomfunction.js";
+import { pokemon } from "./data/enemys.js";
 
 const logo = `                                   ,'\\
     _.----.        ____         ,'  _\\   ___    ___     ____
@@ -34,22 +36,25 @@ inquirer
             type: "list",
             message: "Select a pokemon",
             name: "selectPokemon",
-            choices: ["Glumanda", "Schiggy", "Bisasam", "<<< Quit"],
+            choices: ["Charmander", "Bulbasaur", "Squirtle", "<<< Quit"],
           },
         ])
         .then(({ selectPokemon }) => {
-          if (selectPokemon === "Glumanda") {
+          if (selectPokemon === "Charmander") {
             //display pokemon info for one
-            let pokemonOne = pokemon[0];
-            console.log(pokemonOne);
-          } else if (selectPokemon === "Schiggy") {
+            let pokemonOne = starterPokemon[0].name;
+            console.log(`You choose ${pokemonOne}.Lets Go!`);
+            console.log(`Your Enemie is: ${randomEnemie(pokemon)}`);
+          } else if (selectPokemon === "Bulbasaur") {
             //display pokemon info for two
-            let pokemonTwo = pokemon[1];
-            console.log(pokemonTwo);
-          } else if (selectPokemon === "Bisasam") {
+            let pokemonTwo = starterPokemon[1].name;
+            console.log(`You choose ${pokemonTwo}.Lets Go!`);
+            console.log(`Your Enemie is: ${randomEnemie(pokemon)}`);
+          } else if (selectPokemon === "Squirtle") {
             //display pokemon info for three
-            let pokemonThree = pokemon[2];
-            console.log(pokemonThree);
+            let pokemonThree = starterPokemon[2].name;
+            console.log(`You choose ${pokemonThree}.Lets Go!`);
+            console.log(`Your Enemie is: ${randomEnemie(pokemon)}`);
           } else {
             return;
           }
