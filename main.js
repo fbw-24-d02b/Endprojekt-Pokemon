@@ -18,6 +18,9 @@ _,-'       \`.     |    |  /'.   \\,-'    |   \\  /   |   |    \\  |\`.
 
 console.log(logo);
 
+let hpUser = 150;
+let hpEnemie = 150;
+
 inquirer
   .prompt([
     {
@@ -40,51 +43,39 @@ inquirer
           },
         ])
         .then(({ selectPokemon }) => {
-          if (selectPokemon === "Charmander") {
+          if (selectPokemon) {
             //display pokemon info for one
-            let pokemonOne = starterPokemon[0].name;
-            console.log(`You choose ${pokemonOne}.Lets Go!`);
+            const selectedPokemon = starterPokemon.find(
+              (pokemon) => pokemon.name === selectPokemon
+            );
+            console.log(`You choose ${selectedPokemon.name}. Let's Go!`);
+
             const enemie = randomEnemie(pokemon);
             console.log(`Your Enemie is: ${enemie}`);
-            inquirer.prompt([
-              {
-                type: "list",
-                message: "Which attack do you choose?",
-                name: "attackChoose",
-                choices: [
-                  starterPokemon[0].attacks[0].attack +
-                    ": " +
-                    starterPokemon[0].attacks[0].damage +
-                    " damage",
-                  starterPokemon[0].attacks[1].attack +
-                    ": " +
-                    starterPokemon[0].attacks[1].damage +
-                    " damage",
-                  starterPokemon[0].attacks[2].attack +
-                    ": " +
-                    starterPokemon[0].attacks[2].damage +
-                    " damage",
-                  starterPokemon[0].attacks[3].attack +
-                    ": " +
-                    starterPokemon[0].attacks[3].damage +
-                    " damage",
-                ],
-              },
-            ]);
-          } else if (selectPokemon === "Bulbasaur") {
-            //display pokemon info for two
-            let pokemonTwo = starterPokemon[1].name;
-            console.log(`You choose ${pokemonTwo}.Lets Go!`);
-            const enemie = randomEnemie(pokemon);
-            console.log(`Your Enemie is: ${enemie}`);
-          } else if (selectPokemon === "Squirtle") {
-            //display pokemon info for three
-            let pokemonThree = starterPokemon[2].name;
-            console.log(`You choose ${pokemonThree}.Lets Go!`);
-            const enemie = randomEnemie(pokemon);
-            console.log(`Your Enemie is: ${enemie}`);
-          } else {
-            return;
+            const choices = starterPokemon
+              .find((pkmn) => pkmn === selectedPokemon)
+              .attacks.map(
+                (attack) => `${attack.attack}: ${attack.damage} damage`
+              );
+
+            inquirer
+              .prompt([
+                {
+                  type: "list",
+                  message: "Which attack do you choose?",
+                  name: "attackChoose",
+                  choices: choices,
+                },
+              ])
+              .then(({ attackChoose }) => {
+                console.log(attackChoose);
+                hpEnemie -= parseInt(attackChoose.split(":")[1]);
+                let damage = parseInt(attackChoose.split(":")[1]);
+
+                console.log(
+                  `${enemie} got ${damage} damage and is now by ${hpEnemie}hp`
+                );
+              });
           }
         });
     } else {
