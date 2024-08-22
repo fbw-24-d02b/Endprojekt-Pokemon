@@ -69,8 +69,8 @@ inquirer
               ])
               .then(({ attackChoose }) => {
                 console.log(attackChoose);
-                hpEnemie -= parseInt(attackChoose.split(":")[1]);
                 let damage = parseInt(attackChoose.split(":")[1]);
+                hpEnemie -= damage;
 
                 console.log(
                   `${enemie} got ${damage} damage and is now by ${hpEnemie}hp`
