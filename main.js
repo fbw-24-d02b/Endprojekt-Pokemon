@@ -44,17 +44,20 @@ inquirer
             //display pokemon info for one
             let pokemonOne = starterPokemon[0].name;
             console.log(`You choose ${pokemonOne}.Lets Go!`);
-            console.log(`Your Enemie is: ${randomEnemie(pokemon)}`);
+            const enemie = randomEnemie(pokemon);
+            console.log(`Your Enemie is: ${enemie}`);
           } else if (selectPokemon === "Bulbasaur") {
             //display pokemon info for two
             let pokemonTwo = starterPokemon[1].name;
             console.log(`You choose ${pokemonTwo}.Lets Go!`);
-            console.log(`Your Enemie is: ${randomEnemie(pokemon)}`);
+            const enemie = randomEnemie(pokemon);
+            console.log(`Your Enemie is: ${enemie}`);
           } else if (selectPokemon === "Squirtle") {
             //display pokemon info for three
             let pokemonThree = starterPokemon[2].name;
             console.log(`You choose ${pokemonThree}.Lets Go!`);
-            console.log(`Your Enemie is: ${randomEnemie(pokemon)}`);
+            const enemie = randomEnemie(pokemon);
+            console.log(`Your Enemie is: ${enemie}`);
           } else {
             return;
           }
