@@ -2,7 +2,7 @@
 
 Hallo
 
--Startseite mit Logo und Startsymbol
+-x-Startseite mit Logo und Startsymbol
 
 -Inquire: Pokemonauswahl
 
@@ -17,4 +17,4 @@ Hallo
 
 - Gewonnen oder Verloren
 
--von vorne anfangen(Pokeauswahl) oder beenden(Spiel beenden)?
+- von vorne anfangen(Pokeauswahl) oder beenden(Spiel beenden)?
