@@ -3,17 +3,18 @@
 ## Dependencies
 
 ### inquirer
+  - Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
+  
 ```bash
 npm i inquirer
 ```
-  - Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
 
 ### chalk
+  - Terminal string styling done right.
 ```bash
+
 npm i chalk
 ```
-
-  - Terminal string styling done right.
 
 ---
 
