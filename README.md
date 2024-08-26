@@ -2,41 +2,46 @@
 
 ## Dependencies
 
-### inquirer || `npm i inquirer`
+### inquirer
+```bash
+npm i inquirer
+```
+  - Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
 
-    - Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
+### chalk
+```bash
+npm i chalk
+```
 
-### chalk || `npm i chalk`
-
-    - Terminal string styling done right.
+  - Terminal string styling done right.
 
 ---
 
 ## TO-DO's
 
-    - Sound for Pokemons
-    - Random enemy Pokemon (blinking?)
-    - Web App (HTML, CSS & JS)
+  - Sound for Pokemons
+  - Random enemy Pokemon (blinking?)
+  - Web App (HTML, CSS & JS)
 
 ---
 
 ## DONE
 
-    - ASCII Art:
-      - Pokemon Logo
-      - Grass
-      - Gameover
-      - Game Winner
+- ASCII Art:
+  - Pokemon Logo
+  - Grass
+  - Gameover
+  - Game Winner
 
 ######
 
-    - Start page with logo and start symbol
-    - Inquirer: Pokemon selection
-    - Small text (Which Pokemon, how many HP)
-    - Inquirer: Attack selection
-    - Small text (Point deduction and random enemy attack, maybe depending on type)
-    - Won or lost
-    - Added colors when selecting
+  - Start page with logo and start symbol
+  - Inquirer: Pokemon selection
+  - Small text (Which Pokemon, how many HP)
+  - Inquirer: Attack selection
+  - Small text (Point deduction and random enemy attack, maybe depending on type)
+  - Won or lost
+  - Added colors when selecting
 
 ---
 
