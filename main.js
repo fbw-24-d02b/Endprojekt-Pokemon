@@ -1,6 +1,7 @@
+// import { enemyAttack } from "./enemyAttackFunc.js";
 import inquirer from "inquirer";
 import { starterPokemon } from "./data/starter.js";
-import { randomEnemie } from "./randomfunction.js";
+import { randomEnemy } from "./randomfunction.js";
 import { pokemon } from "./data/enemys.js";
 
 const logo = `                                   ,'\\
@@ -19,7 +20,7 @@ _,-'       \`.     |    |  /'.   \\,-'    |   \\  /   |   |    \\  |\`.
 console.log(logo);
 
 let hpUser = 150;
-let hpEnemie = 150;
+let hpenemy = 150;
 
 inquirer
   .prompt([
@@ -50,8 +51,8 @@ inquirer
             );
             console.log(`You choose ${selectedPokemon.name}. Let's Go!`);
 
-            const enemie = randomEnemie(pokemon);
-            console.log(`Your Enemie is: ${enemie}`);
+            const enemy = randomEnemy(pokemon);
+            console.log(`Your enemy is: ${enemy.name}`);
             const choices = starterPokemon
               .find((pkmn) => pkmn === selectedPokemon)
               .attacks.map(
@@ -70,10 +71,28 @@ inquirer
               .then(({ attackChoose }) => {
                 console.log(attackChoose);
                 let damage = parseInt(attackChoose.split(":")[1]);
-                hpEnemie -= damage;
+                hpenemy -= damage;
 
                 console.log(
-                  `${enemie} got ${damage} damage and is now by ${hpEnemie}hp`
+                  `${enemy.name} got ${damage} damage and is now by ${hpenemy}hp`
+                );
+
+                const enemyAttacks = enemy.attacks.map(
+                  (attack) => attack.attack
+                );
+
+                const enemyDamages = enemy.attacks.map(
+                  (attack) => attack.damage
+                );
+
+                const randomAttackNumber = Math.floor(
+                  Math.random() * enemyAttacks.length
+                );
+
+                hpUser -= enemyDamages[randomAttackNumber];
+
+                console.log(
+                  `${enemy.name} used attack ${enemyAttacks[randomAttackNumber]} with ${enemyDamages[randomAttackNumber]} damage and ${selectedPokemon.name} is now by ${hpUser}hp`
                 );
               });
           }

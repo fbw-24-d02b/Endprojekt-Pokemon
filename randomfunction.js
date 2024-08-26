@@ -1,4 +1,4 @@
-export const randomEnemie = (enemie) => {
+export const randomEnemy = (enemie) => {
   const numberOfEnemie = Math.floor(Math.random() * enemie.length);
-  return enemie[numberOfEnemie].name;
+  return enemie[numberOfEnemie];
 };
