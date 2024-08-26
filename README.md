@@ -16,3 +16,5 @@
 + Gewonnen oder Verloren
 
   - ??? Sound für Pokemons
+
++ Farben beim Auswählen hinzugefügt
