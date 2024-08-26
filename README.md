@@ -14,3 +14,5 @@
 (vielleicht abhängig vom Typ)
 
 + Gewonnen oder Verloren
+
+  - ??? Sound für Pokemons
