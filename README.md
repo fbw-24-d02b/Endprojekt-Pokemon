@@ -2,14 +2,14 @@
 
 ## Dependencies
 
-### inquirer
+### [inquirer](https://www.npmjs.com/package/enquirer)
   - Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
-  
+
 ```bash
 npm i inquirer
 ```
 
-### chalk
+### [chalk](https://www.npmjs.com/package/chalk)
   - Terminal string styling done right.
 ```bash
 
