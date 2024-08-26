@@ -16,7 +16,6 @@ npm i chalk
 [www.npmjs.com/package/chalk](https://www.npmjs.com/package/chalk)
   - Terminal string styling done right.
 
-
 ---
 
 ## TO-DO's
