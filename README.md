@@ -13,7 +13,7 @@ npm i inquirer
 ```bash
 npm i chalk
 ```
-[chalk: www.npmjs.com/package/chalk](https://www.npmjs.com/package/chalk)
+[www.npmjs.com/package/chalk](https://www.npmjs.com/package/chalk)
   - Terminal string styling done right.
 
 
