@@ -3,6 +3,7 @@ import inquirer from "inquirer";
 import { starterPokemon } from "./data/starter.js";
 import { randomEnemy } from "./randomfunction.js";
 import { pokemon } from "./data/enemys.js";
+import { colorizer } from "./data/colorizer.js";
 
 const logo = `                                   ,'\\
     _.----.        ____         ,'  _\\   ___    ___     ____
