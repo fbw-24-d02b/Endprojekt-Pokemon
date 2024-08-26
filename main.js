@@ -9,15 +9,15 @@ import { gras } from "./ascii/gras.js";
 import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
 
-console.log(logo);
+console.log(chalk.hex("#ff0000").bold(logo));
 
 // const charmander = colorize("Charmander").red;
 // const bulbasaur = colorize("Bulbasaur").green;
 // const squirtle = colorize("Squirtle").blue;
 
-const charmander = chalk.hex("#ff0000")("Charmander");
-const bulbasaur = chalk.hex("#00ff00")("Bulbasaur");
-const squirtle = chalk.hex("#0000ff")("Squirtle");
+const charmander = chalk.hex("#ff0000").bold("Charmander");
+const bulbasaur = chalk.hex("#00ff00").bold("Bulbasaur");
+const squirtle = chalk.hex("#0000ff").bold("Squirtle");
 
 inquirer
   .prompt([
@@ -54,9 +54,11 @@ inquirer
 
             const enemy = randomEnemy(pokemon);
 
-            console.log(gras);
+            console.log(chalk.hex("#00ff00").bold(gras));
 
-            console.log(`A wild ${enemy.name} appeared`);
+            console.log(
+              `A wild ${chalk.hex("#ff0000").bold(enemy.name)} appeared`
+            );
 
             const choices = selectedPokemon.attacks.map(
               (attack) => `${attack.attack}: ${attack.damage} damage`
@@ -78,23 +80,20 @@ inquirer
 
                 let playerDamage = parseInt(attackChoose.split(":")[1]);
                 enemyHP -= playerDamage;
+                
                 console.log(
                   `${enemy.name} got ${playerDamage} damage and is now at ${
                     enemyHP < 0 ? 0 : enemyHP
                   } HP`
                 );
 
-                if (enemyHP <= 0) {
-                  console.log(trophy);
-                  console.log(`You defeated ${enemy.name}`);
-                  break;
-                }
-
                 const randomAttackNumber = Math.floor(
                   Math.random() * enemy.attacks.length
                 );
+
                 let enemyDamage = enemy.attacks[randomAttackNumber].damage;
                 playerHP -= enemyDamage;
+
                 console.log(
                   `${enemy.name} used ${
                     enemy.attacks[randomAttackNumber].attack
@@ -103,10 +102,14 @@ inquirer
                   } is now at ${playerHP < 0 ? 0 : playerHP} HP`
                 );
 
+                if (enemyHP <= 0) {
+                  console.log(chalk.hex("#ff00ff").bold(trophy));
+                  console.log(`You defeated ${enemy.name}`);
+                }
+
                 if (playerHP <= 0) {
                   console.log(`You were defeated by ${enemy.name}`);
-                  console.log(gameover);
-                  break;
+                  console.log(chalk.hex("#ff0000").bold(gameover));
                 }
               }
             };
@@ -115,7 +118,7 @@ inquirer
           }
         });
     } else {
-      console.log(gameover);
+      console.log(chalk.hex("#ff0000").bold(gameover));
       process.exit();
     }
   });
