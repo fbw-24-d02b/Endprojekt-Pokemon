@@ -46,7 +46,17 @@ inquirer
             console.log(`You choose ${selectedPokemon.name}. Let's Go!`);
 
             const enemy = randomEnemy(pokemon);
-            console.log(`Your enemy is: ${enemy.name}`);
+            console.log(`        ,,,                      ,,,
+       {{{}}    ,,,             {{{}}    ,,,
+    ,,, ~Y~    {{{}},,,      ,,, ~Y~    {{{}},,, 
+   {{}}} |/,,,  ~Y~{{}}}    {{}}} |/,,,  ~Y~{{}}}
+    ~Y~ \|{{}}}/\|/ ~Y~  ,,, ~Y~ \|{{}}}/\|/ ~Y~  ,,,
+    \|/ \|/~Y~  \|,,,|/ {{}}}\|/ \|/~Y~  \|,,,|/ {{}}}
+    \|/ \|/\|/  \{{{}}/  ~Y~ \|/ \|/\|/  \{{{}}/  ~Y~
+    \|/\\|/\|/ \\|~Y~//  \|/ \|/\\|/\|/ \\|~Y~//  \|/
+    \|//\|/\|/,\\|/|/|// \|/ \|//\|/\|/,\\|/|/|// \|/
+jgs^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^`);
+            console.log(`A wild ${enemy.name} appeared`);
 
             const choices = selectedPokemon.attacks.map(
               (attack) => `${attack.attack}: ${attack.damage} damage`
