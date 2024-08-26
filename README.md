@@ -1,20 +1,16 @@
 # Endprojekt-Pokemon
 
-Hallo
++ Startseite mit Logo und Startsymbol
 
--x-Startseite mit Logo und Startsymbol
++ Inquire: Pokemonauswahl
 
--Inquire: Pokemonauswahl
+-+ zufälliges Gegnerpokemon (blinken?)
 
--zufälliges Gegnerpokemon (blinken?)
++ kleiner Text (Welches Pokemon, wieviel LP)
 
--kleiner Text (Welches Pokemon, wieviel LP)
++ Inquire: Attackenauswahl
 
--Inquire: Attackenauswahl
-
--kleiner Text (Punkteabzug und zufällige Gegnerattacke)
++ kleiner Text (Punkteabzug und zufällige Gegnerattacke)
 (vielleicht abhängig vom Typ)
 
-- Gewonnen oder Verloren
-
-- von vorne anfangen(Pokeauswahl) oder beenden(Spiel beenden)?
++ Gewonnen oder Verloren
