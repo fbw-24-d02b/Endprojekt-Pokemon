@@ -3,6 +3,7 @@ export const pokemon = [
     name: "Pikachu",
     type: "electro",
     level: 20,
+    hp: 150,
     attacks: [
       {
         attack: "ThunderShock",
@@ -26,6 +27,7 @@ export const pokemon = [
     name: "Eevee",
     type: "normal",
     level: 17,
+    hp: 150,
     attacks: [
       {
         attack: "Quick Attack",
@@ -49,6 +51,7 @@ export const pokemon = [
     name: "Jigglypuff",
     type: "fairy",
     level: 16,
+    hp: 150,
     attacks: [
       {
         attack: "Sing",
@@ -72,6 +75,7 @@ export const pokemon = [
     name: "Zubat",
     type: "poison/flying",
     level: 15,
+    hp: 150,
     attacks: [
       {
         attack: "Leech Life",
@@ -95,6 +99,7 @@ export const pokemon = [
     name: "Meowth",
     type: "normal",
     level: 18,
+    hp: 150,
     attacks: [
       {
         attack: "Scratch",
@@ -118,6 +123,7 @@ export const pokemon = [
     name: "Psyduck",
     type: "water",
     level: 19,
+    hp: 150,
     attacks: [
       {
         attack: "Water Gun",
@@ -141,6 +147,7 @@ export const pokemon = [
     name: "Machop",
     type: "fighting",
     level: 20,
+    hp: 150,
     attacks: [
       {
         attack: "Karate Chop",
@@ -164,6 +171,7 @@ export const pokemon = [
     name: "Geodude",
     type: "rock/ground",
     level: 18,
+    hp: 150,
     attacks: [
       {
         attack: "Rock Throw",
@@ -187,6 +195,7 @@ export const pokemon = [
     name: "Vulpix",
     type: "fire",
     level: 17,
+    hp: 150,
     attacks: [
       {
         attack: "Ember",
@@ -210,6 +219,7 @@ export const pokemon = [
     name: "Oddish",
     type: "grass/poison",
     level: 16,
+    hp: 150,
     attacks: [
       {
         attack: "Absorb",

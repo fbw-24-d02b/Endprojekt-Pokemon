@@ -1,9 +1,7 @@
-// import { enemyAttack } from "./enemyAttackFunc.js";
 import inquirer from "inquirer";
 import { starterPokemon } from "./data/starter.js";
 import { randomEnemy } from "./randomfunction.js";
 import { pokemon } from "./data/enemys.js";
-import { colorizer } from "./data/colorizer.js";
 
 const logo = `                                   ,'\\
     _.----.        ____         ,'  _\\   ___    ___     ____
@@ -20,9 +18,6 @@ _,-'       \`.     |    |  /'.   \\,-'    |   \\  /   |   |    \\  |\`.
 
 console.log(logo);
 
-let hpUser = 150;
-let hpenemy = 150;
-
 inquirer
   .prompt([
     {
@@ -34,7 +29,6 @@ inquirer
   ])
   .then(({ playOption }) => {
     if (playOption === "Yes") {
-      //let them view and edit pokemon
       inquirer
         .prompt([
           {
@@ -46,7 +40,6 @@ inquirer
         ])
         .then(({ selectPokemon }) => {
           if (selectPokemon) {
-            //display pokemon info for one
             const selectedPokemon = starterPokemon.find(
               (pokemon) => pokemon.name === selectPokemon
             );
@@ -54,52 +47,56 @@ inquirer
 
             const enemy = randomEnemy(pokemon);
             console.log(`Your enemy is: ${enemy.name}`);
-            const choices = starterPokemon
-              .find((pkmn) => pkmn === selectedPokemon)
-              .attacks.map(
-                (attack) => `${attack.attack}: ${attack.damage} damage`
-              );
 
-            inquirer
-              .prompt([
-                {
-                  type: "list",
-                  message: "Which attack do you choose?",
-                  name: "attackChoose",
-                  choices: choices,
-                },
-              ])
-              .then(({ attackChoose }) => {
-                console.log(attackChoose);
-                let damage = parseInt(attackChoose.split(":")[1]);
-                hpenemy -= damage;
+            const choices = selectedPokemon.attacks.map(
+              (attack) => `${attack.attack}: ${attack.damage} damage`
+            );
 
+            let playerHP = selectedPokemon.hp;
+            let enemyHP = enemy.hp;
+
+            const fightLoop = async () => {
+              while (playerHP > 0 && enemyHP > 0) {
+                const { attackChoose } = await inquirer.prompt([
+                  {
+                    type: "list",
+                    message: "Which attack do you choose?",
+                    name: "attackChoose",
+                    choices: choices,
+                  },
+                ]);
+
+                let playerDamage = parseInt(attackChoose.split(":")[1]);
+                enemyHP -= playerDamage;
                 console.log(
-                  `${enemy.name} got ${damage} damage and is now by ${hpenemy}hp`
+                  `${enemy.name} got ${playerDamage} damage and is now at ${enemyHP} HP`
                 );
 
-                const enemyAttacks = enemy.attacks.map(
-                  (attack) => attack.attack
-                );
-
-                const enemyDamages = enemy.attacks.map(
-                  (attack) => attack.damage
-                );
+                if (enemyHP <= 0) {
+                  console.log(`You defeated ${enemy.name}`);
+                  break;
+                }
 
                 const randomAttackNumber = Math.floor(
-                  Math.random() * enemyAttacks.length
+                  Math.random() * enemy.attacks.length
                 );
-
-                hpUser -= enemyDamages[randomAttackNumber];
-
+                let enemyDamage = enemy.attacks[randomAttackNumber].damage;
+                playerHP -= enemyDamage;
                 console.log(
-                  `${enemy.name} used attack ${enemyAttacks[randomAttackNumber]} with ${enemyDamages[randomAttackNumber]} damage and ${selectedPokemon.name} is now by ${hpUser}hp`
+                  `${enemy.name} used ${enemy.attacks[randomAttackNumber].attack} and dealt ${enemyDamage} damage. ${selectedPokemon.name} is now at ${playerHP} HP`
                 );
-              });
+
+                if (playerHP <= 0) {
+                  console.log(`You were defeated by ${enemy.name}`);
+                  break;
+                }
+              }
+            };
+
+            fightLoop();
           }
         });
     } else {
-      //exit
       console.log(`⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠖⠛⣻⣿⣻⣿⣿⣶⠶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠶⣦⡀⠀⠀⠀⠀⠀⠀⢀⡴⢋⣤⠶⣟⣛⣿⡿⠿⣿⣿⣷⡾⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣇⣤⣿⡇⠀⠀⠀⠀⠀⢀⡞⣦⣨⣿⡳⠉⢛⣋⣤⣤⣘⣷⣿⡇⣼⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

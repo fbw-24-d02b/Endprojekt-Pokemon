@@ -3,6 +3,7 @@ export const starterPokemon = [
     name: "Charmander",
     type: "fire",
     level: 18,
+    hp: 150,
     attacks: [
       {
         attack: "Ember",
@@ -26,6 +27,7 @@ export const starterPokemon = [
     name: "Bulbasaur",
     type: "grass/poison",
     level: 16,
+    hp: 150,
     attacks: [
       {
         attack: "Vine Whip",
@@ -49,6 +51,7 @@ export const starterPokemon = [
     name: "Squirtle",
     type: "water",
     level: 15,
+    hp: 150,
     attacks: [
       {
         attack: "Water Gun",
