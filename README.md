@@ -65,6 +65,8 @@ npm i chalk
    node main.js
    ```
 
+---
+
 ## Usage
 
 1. Start the game and follow the on-screen instructions.
