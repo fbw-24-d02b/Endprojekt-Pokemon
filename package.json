@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Hallo",
   "main": "main.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^5.3.0",
     "inquirer": "^10.1.8"
   }
 }

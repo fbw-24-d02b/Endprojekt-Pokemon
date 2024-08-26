@@ -1,14 +1,23 @@
 import inquirer from "inquirer";
+import chalk from "chalk"; // Chalk-Bibliothek importieren
 import { starterPokemon } from "./data/starter.js";
-import { randomEnemy } from "./functions/randomEnemy.js";
 import { pokemon } from "./data/enemys.js";
+import { randomEnemy } from "./functions/randomEnemy.js";
+import { colorize } from "./functions/colorize.js";
 import { logo } from "./ascii/logo.js";
 import { gras } from "./ascii/gras.js";
 import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
-import { colorize } from "./functions/colorize.js";
 
 console.log(logo);
+
+// const charmander = colorize("Charmander").red;
+// const bulbasaur = colorize("Bulbasaur").green;
+// const squirtle = colorize("Squirtle").blue;
+
+const charmander = chalk.hex("#ff0000")("Charmander");
+const bulbasaur = chalk.hex("#00ff00")("Bulbasaur");
+const squirtle = chalk.hex("#0000ff")("Squirtle");
 
 inquirer
   .prompt([
@@ -27,7 +36,13 @@ inquirer
             type: "list",
             message: "Select a pokemon",
             name: "selectPokemon",
-            choices: ["Charmander", "Bulbasaur", "Squirtle", "<<< Quit"],
+            // choices: ["Charmander", "Bulbasaur", "Squirtle", "<<< Quit"],
+            choices: [
+              { name: charmander, value: "Charmander" },
+              { name: bulbasaur, value: "Bulbasaur" },
+              { name: squirtle, value: "Squirtle" },
+              "<<< Quit",
+            ],
           },
         ])
         .then(({ selectPokemon }) => {
