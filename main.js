@@ -69,7 +69,8 @@ inquirer
             const enemy = randomEnemy(pokemon);
 
             console.log(chalk.hex("#00ff00").bold(gras));
-
+            const enemyPicture = pokemonImages[enemy.name.toLowerCase()];
+            console.log(enemyPicture);
             console.log(
               `A wild ${chalk.hex("#ff0000").bold(enemy.name)} appeared`
             );
