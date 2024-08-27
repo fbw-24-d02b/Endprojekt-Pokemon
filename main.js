@@ -7,21 +7,6 @@ import { logo } from "./ascii/logo.js";
 import { gras } from "./ascii/gras.js";
 import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
-// import {
-//   Charmander,
-//   bulbasaur,
-//   squirtle,
-//   pikachu,
-//   oddish,
-//   geodude,
-//   machop,
-//   psyduck,
-//   meowth,
-//   zubat,
-//   jigglypuff,
-//   evee,
-//   vulpix,
-// } from "./ascii/pokemon-pictures.js";
 import * as pokemonImages from "./ascii/pokemon-pictures.js";
 
 console.log(chalk.hex("#ff0000").bold(logo));
@@ -47,7 +32,6 @@ inquirer
             type: "list",
             message: "Select a pokemon",
             name: "selectPokemon",
-            // choices: ["Charmander", "Bulbasaur", "Squirtle", "<<< Quit"],
             choices: [
               { name: charmanderColor, value: "Charmander" },
               { name: bulbasaurColor, value: "Bulbasaur" },
