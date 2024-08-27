@@ -3,17 +3,12 @@ import chalk from "chalk"; // Chalk-Bibliothek importieren
 import { starterPokemon } from "./data/starter.js";
 import { pokemon } from "./data/enemys.js";
 import { randomEnemy } from "./functions/randomEnemy.js";
-import { colorize } from "./functions/colorize.js";
 import { logo } from "./ascii/logo.js";
 import { gras } from "./ascii/gras.js";
 import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
 
 console.log(chalk.hex("#ff0000").bold(logo));
-
-// const charmander = colorize("Charmander").red;
-// const bulbasaur = colorize("Bulbasaur").green;
-// const squirtle = colorize("Squirtle").blue;
 
 const charmander = chalk.hex("#ff0000").bold("Charmander");
 const bulbasaur = chalk.hex("#00ff00").bold("Bulbasaur");
