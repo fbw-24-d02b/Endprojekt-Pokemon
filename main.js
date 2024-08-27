@@ -3,21 +3,17 @@ import chalk from "chalk"; // Chalk-Bibliothek importieren
 import { starterPokemon } from "./data/starter.js";
 import { pokemon } from "./data/enemys.js";
 import { randomEnemy } from "./functions/randomEnemy.js";
-import { colorize } from "./functions/colorize.js";
 import { logo } from "./ascii/logo.js";
 import { gras } from "./ascii/gras.js";
 import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
+import * as pokemonImages from "./ascii/pokemon-pictures.js";
 
 console.log(chalk.hex("#ff0000").bold(logo));
 
-// const charmander = colorize("Charmander").red;
-// const bulbasaur = colorize("Bulbasaur").green;
-// const squirtle = colorize("Squirtle").blue;
-
-const charmander = chalk.hex("#ff0000").bold("Charmander");
-const bulbasaur = chalk.hex("#00ff00").bold("Bulbasaur");
-const squirtle = chalk.hex("#0000ff").bold("Squirtle");
+const charmanderColor = chalk.hex("#ff0000").bold("Charmander");
+const bulbasaurColor = chalk.hex("#00ff00").bold("Bulbasaur");
+const squirtleColor = chalk.hex("#0000ff").bold("Squirtle");
 
 inquirer
   .prompt([
@@ -36,11 +32,10 @@ inquirer
             type: "list",
             message: "Select a pokemon",
             name: "selectPokemon",
-            // choices: ["Charmander", "Bulbasaur", "Squirtle", "<<< Quit"],
             choices: [
-              { name: charmander, value: "Charmander" },
-              { name: bulbasaur, value: "Bulbasaur" },
-              { name: squirtle, value: "Squirtle" },
+              { name: charmanderColor, value: "Charmander" },
+              { name: bulbasaurColor, value: "Bulbasaur" },
+              { name: squirtleColor, value: "Squirtle" },
               "<<< Quit",
             ],
           },
@@ -50,12 +45,16 @@ inquirer
             const selectedPokemon = starterPokemon.find(
               (pokemon) => pokemon.name === selectPokemon
             );
-            console.log(`You choose ${selectedPokemon.name}. Let's Go!`);
+            const selectedPokemonPicture = pokemonImages[selectedPokemon.name.toLowerCase()];
+
+            console.log(`You choose ${selectedPokemon.name} . Let's Go!`);
+            console.log(selectedPokemonPicture);
 
             const enemy = randomEnemy(pokemon);
 
             console.log(chalk.hex("#00ff00").bold(gras));
-
+            const enemyPicture = pokemonImages[enemy.name.toLowerCase()];
+            console.log(enemyPicture);
             console.log(
               `A wild ${chalk.hex("#ff0000").bold(enemy.name)} appeared`
             );
@@ -80,7 +79,7 @@ inquirer
 
                 let playerDamage = parseInt(attackChoose.split(":")[1]);
                 enemyHP -= playerDamage;
-                
+
                 console.log(
                   `${enemy.name} got ${playerDamage} damage and is now at ${
                     enemyHP < 0 ? 0 : enemyHP
@@ -103,7 +102,7 @@ inquirer
                 );
 
                 if (enemyHP <= 0) {
-                  console.log(chalk.hex("#ff00ff").bold(trophy));
+                  console.log(chalk.hex("#ffff00").bold(trophy));
                   console.log(`You defeated ${enemy.name}`);
                 }
 
