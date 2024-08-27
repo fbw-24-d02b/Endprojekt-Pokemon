@@ -8,12 +8,23 @@ import { gras } from "./ascii/gras.js";
 import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
 import * as pokemonImages from "./ascii/pokemon-pictures.js";
+import player from 'play-sound';
+
+const soundPlayer = player();
+
+const playSound = (file) => {
+  soundPlayer.play(file, (err) => {
+    if (err) console.error(`Could not play sound: ${err}`);
+  });
+};
+
 
 console.log(chalk.hex("#ff0000").bold(logo));
 
 const charmanderColor = chalk.hex("#ff0000").bold("Charmander");
 const bulbasaurColor = chalk.hex("#00ff00").bold("Bulbasaur");
 const squirtleColor = chalk.hex("#0000ff").bold("Squirtle");
+
 
 inquirer
   .prompt([
@@ -53,6 +64,7 @@ inquirer
             const enemy = randomEnemy(pokemon);
 
             console.log(chalk.hex("#00ff00").bold(gras));
+            playSound('./sounds/BattleSound.mp3');
             const enemyPicture = pokemonImages[enemy.name.toLowerCase()];
             console.log(enemyPicture);
             console.log(

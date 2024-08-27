@@ -3,7 +3,7 @@ export const pokemon = [
     name: "Pikachu",
     type: "electro",
     level: 20,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "ThunderShock",
@@ -27,7 +27,7 @@ export const pokemon = [
     name: "Eevee",
     type: "normal",
     level: 17,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Quick Attack",
@@ -51,11 +51,11 @@ export const pokemon = [
     name: "Jigglypuff",
     type: "fairy",
     level: 16,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Sing",
-        damage: 6,
+        damage: 15,
       },
       {
         attack: "Double Slap",
@@ -75,7 +75,7 @@ export const pokemon = [
     name: "Zubat",
     type: "poison/flying",
     level: 15,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Leech Life",
@@ -91,7 +91,7 @@ export const pokemon = [
       },
       {
         attack: "Confuse Ray",
-        damage: 5,
+        damage: 15,
       },
     ],
   },
@@ -99,7 +99,7 @@ export const pokemon = [
     name: "Meowth",
     type: "normal",
     level: 18,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Scratch",
@@ -123,7 +123,7 @@ export const pokemon = [
     name: "Psyduck",
     type: "water",
     level: 19,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Water Gun",
@@ -135,7 +135,7 @@ export const pokemon = [
       },
       {
         attack: "Disable",
-        damage: 5,
+        damage: 15,
       },
       {
         attack: "Zen Headbutt",
@@ -147,7 +147,7 @@ export const pokemon = [
     name: "Machop",
     type: "fighting",
     level: 20,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Karate Chop",
@@ -163,7 +163,7 @@ export const pokemon = [
       },
       {
         attack: "Focus Energy",
-        damage: 5,
+        damage: 15,
       },
     ],
   },
@@ -171,7 +171,7 @@ export const pokemon = [
     name: "Geodude",
     type: "rock/ground",
     level: 18,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Rock Throw",
@@ -183,11 +183,11 @@ export const pokemon = [
       },
       {
         attack: "Self-Destruct",
-        damage: 100,
+        damage: 70,
       },
       {
         attack: "Defense Curl",
-        damage: 5,
+        damage: 15,
       },
     ],
   },
@@ -195,7 +195,7 @@ export const pokemon = [
     name: "Vulpix",
     type: "fire",
     level: 17,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Ember",
@@ -207,7 +207,7 @@ export const pokemon = [
       },
       {
         attack: "Will-O-Wisp",
-        damage: 5,
+        damage: 15,
       },
       {
         attack: "Flame Burst",
@@ -219,7 +219,7 @@ export const pokemon = [
     name: "Oddish",
     type: "grass/poison",
     level: 16,
-    hp: 150,
+    hp: 250,
     attacks: [
       {
         attack: "Absorb",
@@ -227,7 +227,7 @@ export const pokemon = [
       },
       {
         attack: "Poison Powder",
-        damage: 5,
+        damage: 15,
       },
       {
         attack: "Acid",
