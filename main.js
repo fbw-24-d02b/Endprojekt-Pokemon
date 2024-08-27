@@ -98,7 +98,7 @@ inquirer
                 );
 
                 if (enemyHP <= 0) {
-                  console.log(chalk.hex("#ff00ff").bold(trophy));
+                  console.log(chalk.hex("#ffff00").bold(trophy));
                   console.log(`You defeated ${enemy.name}`);
                 }
 
