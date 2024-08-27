@@ -1,20 +1,23 @@
 import inquirer from "inquirer";
-// import { Schiggy, Bisasam, Glumanda } from "./starterpokemon.js";
+import chalk from "chalk"; // Chalk-Bibliothek importieren
+import { starterPokemon } from "./data/starter.js";
+import { pokemon } from "./data/enemys.js";
+import { randomEnemy } from "./functions/randomEnemy.js";
+import { colorize } from "./functions/colorize.js";
+import { logo } from "./ascii/logo.js";
+import { gras } from "./ascii/gras.js";
+import { gameover } from "./ascii/gameover.js";
+import { trophy } from "./ascii/trophy.js";
 
-const logo = `                                   ,'\\
-    _.----.        ____         ,'  _\\   ___    ___     ____
-_,-'       \`.     |    |  /'.   \\,-'    |   \\  /   |   |    \\  |\`.
-\\      __    \\    '-.  | /   \`.  ___    |    \\/    |   '-.   \\ |  |
- \\.    \\ \\   |  __  |  |/    ,','_  \`.  |          | __  |    \\|  |
-   \\    \\/   /,' _\`.|      ,' / / / /   |          ,' _\`.|     |  |
-    \\     ,'-'/  /   \\    ,'   | \\/ / ,\`.|         /  /   \\  |     |
-     \\    \\ |   \\_/  |   \`-.  \\    \`'  /|  |    ||   \\_/  | |\\    |
-      \\    \\ \\      /       \`-.\`.___,-' |  |\\  /| \\      /  | |   |
-       \\    \\ \`.__,'|  |\`-._    \`|      |__| \\/ |  \`.__,'|  | |   |
-        \\_.-'       |__|    \`-._ |              '-.|     '-.| |   |
-                                \`'                            '-._|`;
+console.log(chalk.hex("#ff0000").bold(logo));
 
-console.log(logo);
+// const charmander = colorize("Charmander").red;
+// const bulbasaur = colorize("Bulbasaur").green;
+// const squirtle = colorize("Squirtle").blue;
+
+const charmander = chalk.hex("#ff0000").bold("Charmander");
+const bulbasaur = chalk.hex("#00ff00").bold("Bulbasaur");
+const squirtle = chalk.hex("#0000ff").bold("Squirtle");
 
 inquirer
   .prompt([
@@ -27,64 +30,95 @@ inquirer
   ])
   .then(({ playOption }) => {
     if (playOption === "Yes") {
-      //let them view and edit pokemon
       inquirer
         .prompt([
           {
             type: "list",
             message: "Select a pokemon",
             name: "selectPokemon",
-            choices: ["Glumanda", "Schiggy", "Bisasam", "<<< Quit"],
+            // choices: ["Charmander", "Bulbasaur", "Squirtle", "<<< Quit"],
+            choices: [
+              { name: charmander, value: "Charmander" },
+              { name: bulbasaur, value: "Bulbasaur" },
+              { name: squirtle, value: "Squirtle" },
+              "<<< Quit",
+            ],
           },
         ])
         .then(({ selectPokemon }) => {
-          if (selectPokemon === "Glumanda") {
-            //display pokemon info for one
-            let pokemonOne = pokemon[0];
-            console.log(pokemonOne);
-          } else if (selectPokemon === "Schiggy") {
-            //display pokemon info for two
-            let pokemonTwo = pokemon[1];
-            console.log(pokemonTwo);
-          } else if (selectPokemon === "Bisasam") {
-            //display pokemon info for three
-            let pokemonThree = pokemon[2];
-            console.log(pokemonThree);
-          } else {
-            return;
+          if (selectPokemon) {
+            const selectedPokemon = starterPokemon.find(
+              (pokemon) => pokemon.name === selectPokemon
+            );
+            console.log(`You choose ${selectedPokemon.name}. Let's Go!`);
+
+            const enemy = randomEnemy(pokemon);
+
+            console.log(chalk.hex("#00ff00").bold(gras));
+
+            console.log(
+              `A wild ${chalk.hex("#ff0000").bold(enemy.name)} appeared`
+            );
+
+            const choices = selectedPokemon.attacks.map(
+              (attack) => `${attack.attack}: ${attack.damage} damage`
+            );
+
+            let playerHP = selectedPokemon.hp;
+            let enemyHP = enemy.hp;
+
+            const fightLoop = async () => {
+              while (playerHP > 0 && enemyHP > 0) {
+                const { attackChoose } = await inquirer.prompt([
+                  {
+                    type: "list",
+                    message: "Which attack do you choose?",
+                    name: "attackChoose",
+                    choices: choices,
+                  },
+                ]);
+
+                let playerDamage = parseInt(attackChoose.split(":")[1]);
+                enemyHP -= playerDamage;
+                
+                console.log(
+                  `${enemy.name} got ${playerDamage} damage and is now at ${
+                    enemyHP < 0 ? 0 : enemyHP
+                  } HP`
+                );
+
+                const randomAttackNumber = Math.floor(
+                  Math.random() * enemy.attacks.length
+                );
+
+                let enemyDamage = enemy.attacks[randomAttackNumber].damage;
+                playerHP -= enemyDamage;
+
+                console.log(
+                  `${enemy.name} used ${
+                    enemy.attacks[randomAttackNumber].attack
+                  } and dealt ${enemyDamage} damage. ${
+                    selectedPokemon.name
+                  } is now at ${playerHP < 0 ? 0 : playerHP} HP`
+                );
+
+                if (enemyHP <= 0) {
+                  console.log(chalk.hex("#ff00ff").bold(trophy));
+                  console.log(`You defeated ${enemy.name}`);
+                }
+
+                if (playerHP <= 0) {
+                  console.log(`You were defeated by ${enemy.name}`);
+                  console.log(chalk.hex("#ff0000").bold(gameover));
+                }
+              }
+            };
+
+            fightLoop();
           }
         });
     } else {
-      //exit
-      console.log(`⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠖⠛⣻⣿⣻⣿⣿⣶⠶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠶⣦⡀⠀⠀⠀⠀⠀⠀⢀⡴⢋⣤⠶⣟⣛⣿⡿⠿⣿⣿⣷⡾⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣇⣤⣿⡇⠀⠀⠀⠀⠀⢀⡞⣦⣨⣿⡳⠉⢛⣋⣤⣤⣘⣷⣿⡇⣼⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠉⣿⣭⡇⠀⠀⠀⠀⠀⢸⡁⣿⡟⠉⠉⠓⠻⠿⠿⠟⠛⠉⠀⠀⠉⢫⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠈⠀⠇⠀⠀⠀⠀⠀⢸⡿⠷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣦⣤⡿⣂⠀⠀⠀⠀⠀⠘⣿⣿⡶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡇⠙⠋⢸⠀⠀⠀⠀⠀⢀⢿⣿⠁⠀⢀⣀⣤⣀⣀⠆⠀⣀⣤⣴⣶⣾⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣠⠤⣿⠀⠀⢸⣀⣀⡀⠀⠀⣿⣻⣻⡂⠚⣫⣽⠿⣻⠟⢁⠀⣿⠛⠛⠹⠛⢿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢀⡇⠀⣾⠀⠀⠸⣇⣈⢹⣤⣄⠻⡿⡝⣇⠀⠀⠀⠈⠉⠀⠘⠚⣷⣄⠀⠀⠀⠘⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⣼⠟⠛⣿⠀⠀⠙⢯⠉⠳⣿⠾⣷⡿⣷⢮⢷⡀⠀⠀⣠⠦⣗⠀⣹⣽⣆⠀⠀⢠⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⡞⠉⡇⢸⡟⣆⠀⠀⠀⠀⠀⡤⢧⡈⡇⠈⠻⣆⠙⢤⣼⣯⣀⣈⣛⣿⠿⣯⡗⢀⣾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣿⠛⠀⡇⢶⠀⠸⡄⠀⠀⠀⢸⠁⠀⢹⡇⠀⣰⣿⣄⠈⠃⠙⢿⣦⣤⡴⣾⢿⠇⢸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠹⡀⢰⡇⠀⠀⠀⢻⠀⠀⠀⢸⡆⠀⠀⣷⣾⣿⣿⠈⢳⡀⠀⠀⠹⣷⣮⡵⠟⠀⣼⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠐⠂⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣧⡀⠘⠳⣄⠀⠀⠀⠀⢀⡴⣻⠀⠀⠰⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣦⡀⠈⠙⠒⠒⣺⣿⣶⣿⣿⣿⣶⣽⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠈⠓⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣯⢳⣀⠀⢀⣼⣷⣤⣞⣛⠿⣿⠈⠀⢹⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⢄⣀⡀⠀⠀⠀⠄⢰⡿⢿⣿⣿⣿⣿⣿⣿⣧⡻⣿⡿⠁⠈⠛⢿⣛⣻⣿⠀⠀⠀⢿⣿⣿⣿⣿⡀⠀⣀⣀⣤⣤⣴⣶⡾⠿⠿⣿⡄⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣿⠀⠀⣀⣤⠖⠋⣠⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⢹⠿⢛⣦⣀⣀⣨⣿⣿⣿⣿⣿⡿⢻⣿⣻⣭⣭⣤⣤⣄⠀⣿⣇⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠟⠛⠉⠁⣀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⣀⣠⣤⣴⣿⣶⡿⠿⠿⠛⠛⢩⣭⢻⣷⣿⣿⡿⠿⠈⣿⣿⠉⠻⣿⡆⠸⣿⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠠⣎⣁⣠⣴⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠛⠋⣙⣽⣦⣄⠀⢿⣷⡀⠀⢸⣿⠘⣿⣧⠀⠀⠀⠀⢹⣿⣶⣾⣿⣇⠀⣿⣆⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⢿⡛⣿⣯⣭⣴⣾⣿⠁⠀⠀⢰⣿⡟⠛⢿⣷⠈⢿⣧⠀⢸⣿⠀⢹⣿⣿⠿⠇⠀⠘⣿⡏⠉⢹⣿⡄⢸⣿⠀
-⠀⠀⠀⢀⣀⣀⣤⣤⣶⣾⡿⠿⢿⠻⠛⠋⣽⣅⠀⠀⢠⣿⣇⠸⣿⡟⠋⠉⠁⠀⠀⠀⠘⣿⡇⠀⠸⣿⡆⠈⢿⣷⣸⣿⠀⠘⣿⣇⢀⣀⣀⡄⢹⣿⡄⠈⠿⠷⠘⣿⡆
-⠰⣶⡿⠿⠛⣛⣫⣉⠉⠀⢠⣾⣿⣿⣷⡄⢸⣿⣷⣤⣾⣿⣿⠀⣿⣷⣤⣶⣦⠀⠀⠀⠀⢿⣿⠀⠀⣿⣧⠀⠈⢿⣿⣿⠀⠀⢿⣿⠿⠿⠛⠃⢈⣋⣤⣤⣴⣶⣶⡿⠇
-⠀⣿⣇⠀⣼⣿⠿⢿⣿⣆⣿⣿⠀⠈⢿⣷⠈⣿⡏⢿⣿⠉⣿⡇⢸⣿⡏⠉⠁⠀⠀⠀⠀⠘⢿⣷⣶⣿⠏⠀⠀⠈⠛⢃⣀⣀⣤⣴⣶⣾⠿⠿⠿⠛⠋⠉⠉⠀⠀⠀⠀
-⠀⠸⣿⠀⢿⣿⠀⠀⢙⣃⠘⣿⣷⣶⣾⣿⡆⢻⣿⠀⠀⠀⢻⣿⠈⣿⣷⣶⣶⣿⠇⠀⠀⠀⢀⣈⣉⣤⣴⣶⣶⠿⠿⠟⠛⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⣿⡇⢸⣿⡆⢸⣿⣿⡀⢿⣿⠉⠈⣿⣧⠸⣿⣧⠀⠀⠘⠿⡃⢘⣉⣡⣤⣤⣴⣾⠿⠿⠟⠛⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⢸⣿⠀⢿⣷⣤⣼⣿⠀⠸⣿⠆⠀⠘⣛⣀⣩⣥⣤⣶⣶⣿⠿⠟⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠈⣿⡇⠀⠉⠛⣋⣡⣤⣤⣶⣶⣶⠿⠟⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⢻⣿⣾⠿⠿⠟⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`);
+      console.log(chalk.hex("#ff0000").bold(gameover));
       process.exit();
     }
   });
