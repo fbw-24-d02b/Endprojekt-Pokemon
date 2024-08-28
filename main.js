@@ -103,29 +103,32 @@ inquirer
                 let enemyDamage = enemy.attacks[randomAttackNumber].damage;
                 playerHP -= enemyDamage;
 
-                setTimeout(() => {
-                  player.play("./sounds/attackenemy.mp3");
-                  console.log(`
+                if (enemyHP > 0) {
+                  setTimeout(() => {
+                    player.play("./sounds/attackenemy.mp3");
+                    console.log(`
 ${enemy.name} used ${
-                    enemy.attacks[randomAttackNumber].attack
-                  } and dealt ${enemyDamage} damage. ${
-                    selectedPokemon.name
-                  } is now at ${playerHP < 0 ? 0 : playerHP} HP`);
-                }, 1000);
-
+                      enemy.attacks[randomAttackNumber].attack
+                    } and dealt ${enemyDamage} damage. ${
+                      selectedPokemon.name
+                    } is now at ${playerHP < 0 ? 0 : playerHP} HP`);
+                  }, 1000);
+                }
                 if (enemyHP <= 0) {
                   console.log(chalk.hex("#ffff00").bold(trophy));
                   console.log(`You defeated ${enemy.name}`);
                   player.play("./sounds/win.mp3");
                 }
 
-                if (playerHP <= 0) {
-                  console.log(
-                    `You were defeated by ${enemy.name}. You have to go to the healing center to heal your pokemon!`
-                  );
-                  player.play("./sounds/healingcenter.mp3");
-                  console.log(chalk.hex("#ff0000").bold(gameover));
-                }
+                setTimeout(() => {
+                  if (playerHP <= 0) {
+                    console.log(
+                      `You were defeated by ${enemy.name}. You have to go to the healing center to heal your pokemon!`
+                    );
+                    player.play("./sounds/healingcenter.mp3");
+                    console.log(chalk.hex("#ff0000").bold(gameover));
+                  }
+                }, 1200);
               }
             };
 
