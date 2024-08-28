@@ -8,23 +8,17 @@ import { gras } from "./ascii/gras.js";
 import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
 import * as pokemonImages from "./ascii/pokemon-pictures.js";
-import player from 'play-sound';
+import playerInit from "play-sound";
 
-const soundPlayer = player();
-
-const playSound = (file) => {
-  soundPlayer.play(file, (err) => {
-    if (err) console.error(`Could not play sound: ${err}`);
-  });
-};
-
+const player = playerInit({
+  player: "mpg123",
+});
 
 console.log(chalk.hex("#ff0000").bold(logo));
 
 const charmanderColor = chalk.hex("#ff0000").bold("Charmander");
 const bulbasaurColor = chalk.hex("#00ff00").bold("Bulbasaur");
 const squirtleColor = chalk.hex("#0000ff").bold("Squirtle");
-
 
 inquirer
   .prompt([
@@ -56,7 +50,8 @@ inquirer
             const selectedPokemon = starterPokemon.find(
               (pokemon) => pokemon.name === selectPokemon
             );
-            const selectedPokemonPicture = pokemonImages[selectedPokemon.name.toLowerCase()];
+            const selectedPokemonPicture =
+              pokemonImages[selectedPokemon.name.toLowerCase()];
 
             console.log(`You choose ${selectedPokemon.name} . Let's Go!`);
             console.log(selectedPokemonPicture);
@@ -64,7 +59,8 @@ inquirer
             const enemy = randomEnemy(pokemon);
 
             console.log(chalk.hex("#00ff00").bold(gras));
-            playSound('./sounds/BattleSound.mp3');
+            player.play("./sounds/BattleSound.mp3");
+
             const enemyPicture = pokemonImages[enemy.name.toLowerCase()];
             console.log(enemyPicture);
             console.log(
@@ -92,6 +88,8 @@ inquirer
                 let playerDamage = parseInt(attackChoose.split(":")[1]);
                 enemyHP -= playerDamage;
 
+                player.play("./sounds/attackuser.mp3");
+
                 console.log(
                   `${enemy.name} got ${playerDamage} damage and is now at ${
                     enemyHP < 0 ? 0 : enemyHP
@@ -105,21 +103,27 @@ inquirer
                 let enemyDamage = enemy.attacks[randomAttackNumber].damage;
                 playerHP -= enemyDamage;
 
-                console.log(
-                  `${enemy.name} used ${
+                setTimeout(() => {
+                  player.play("./sounds/attackenemy.mp3");
+                  console.log(`
+${enemy.name} used ${
                     enemy.attacks[randomAttackNumber].attack
                   } and dealt ${enemyDamage} damage. ${
                     selectedPokemon.name
-                  } is now at ${playerHP < 0 ? 0 : playerHP} HP`
-                );
+                  } is now at ${playerHP < 0 ? 0 : playerHP} HP`);
+                }, 1000);
 
                 if (enemyHP <= 0) {
                   console.log(chalk.hex("#ffff00").bold(trophy));
                   console.log(`You defeated ${enemy.name}`);
+                  player.play("./sounds/win.mp3");
                 }
 
                 if (playerHP <= 0) {
-                  console.log(`You were defeated by ${enemy.name}`);
+                  console.log(
+                    `You were defeated by ${enemy.name}. You have to go to the healing center to heal your pokemon!`
+                  );
+                  player.play("./sounds/healingcenter.mp3");
                   console.log(chalk.hex("#ff0000").bold(gameover));
                 }
               }
