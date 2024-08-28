@@ -9,6 +9,7 @@ import { gameover } from "./ascii/gameover.js";
 import { trophy } from "./ascii/trophy.js";
 import * as pokemonImages from "./ascii/pokemon-pictures.js";
 import playerInit from "play-sound";
+import { gameExit } from "./ascii/gameExit.js";
 
 /**
  * Initializes the sound player with the specified player executable.
@@ -188,7 +189,7 @@ ${enemy.name} used ${
           }
         });
     } else {
-      console.log(chalk.hex("#ff0000").bold(gameover));
+      console.log(chalk.hex("#ff0000").bold(gameExit));
       process.exit();
     }
   });
