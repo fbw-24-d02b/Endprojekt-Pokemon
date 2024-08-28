@@ -104,7 +104,3 @@ sudo apt install mpg123
 ---
 
 Have fun playing!
-
-```
-
-```
