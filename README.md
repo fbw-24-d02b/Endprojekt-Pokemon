@@ -3,26 +3,51 @@
 ## Dependencies
 
 ### Enquirer
+
 ```bash
 npm i inquirer
 ```
+
 [www.npmjs.com/package/enquirer](https://www.npmjs.com/package/enquirer)
-  - Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
+
+- Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
 
 ### Chalk
+
 ```bash
 npm i chalk
 ```
+
 [www.npmjs.com/package/chalk](https://www.npmjs.com/package/chalk)
-  - Terminal string styling done right.
+
+- Terminal string styling done right.
+
+### Play Sound
+
+```bash
+npm i play-sound
+```
+
+[www.npmjs.com/package/play-sound](https://www.npmjs.com/package/play-sound)
+
+- Play sounds by shelling out to one of the available audio players.
+
+### Sound System
+
+```bash
+sudo apt install mpg123
+```
+
+[www.mpg123.de](https://www.mpg123.de)
+
+- Fast console MPEG Audio Player and decoder library.
 
 ---
 
 ## TO-DO's
 
-  - Sound for Pokemons
-  - Random enemy Pokemon (blinking?)
-  - Web App (HTML, CSS & JS)
+- Random enemy Pokemon (blinking?)
+- Web App (HTML, CSS & JS)
 
 ---
 
@@ -30,19 +55,21 @@ npm i chalk
 
 - ASCII Art:
   - Pokemon Logo
+  - Pokemon Pictures
   - Grass
   - Gameover
   - Game Winner
 
 ######
 
-  - Start page with logo and start symbol
-  - Inquirer: Pokemon selection
-  - Small text (Which Pokemon, how many HP)
-  - Inquirer: Attack selection
-  - Small text (Point deduction and random enemy attack, maybe depending on type)
-  - Won or lost
-  - Added colors when selecting
+- Start page with logo and start symbol
+- Inquirer: Pokemon selection
+- Small text (Which Pokemon, how many HP)
+- Inquirer: Attack selection
+- Small text (Point deduction and random enemy attack, maybe depending on type)
+- Sound for Pokemons
+- Won or lost
+- Added colors when selecting
 
 ---
 
@@ -52,6 +79,11 @@ npm i chalk
    ```bash
    git clone git@github.com:fbw-24-d02b/Endprojekt-Pokemon.git
    ```
+
+```
+
+```
+
 2. Navigate to the project directory:
    ```bash
    cd Endproject-Pokemon
@@ -77,3 +109,7 @@ npm i chalk
 ---
 
 Have fun playing!
+
+```
+
+```
