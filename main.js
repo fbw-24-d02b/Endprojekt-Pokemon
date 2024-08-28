@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import chalk from "chalk"; // Chalk-Bibliothek importieren
+import chalk from "chalk";
 import { starterPokemon } from "./data/starter.js";
 import { pokemon } from "./data/enemys.js";
 import { randomEnemy } from "./functions/randomEnemy.js";
