@@ -79,11 +79,6 @@ sudo apt install mpg123
    ```bash
    git clone git@github.com:fbw-24-d02b/Endprojekt-Pokemon.git
    ```
-
-```
-
-```
-
 2. Navigate to the project directory:
    ```bash
    cd Endproject-Pokemon
