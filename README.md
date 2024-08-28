@@ -2,15 +2,15 @@
 
 ## Dependencies
 
-### Enquirer
+### Inquirer
 
 ```bash
 npm i inquirer
 ```
 
-[www.npmjs.com/package/enquirer](https://www.npmjs.com/package/enquirer)
+[www.npmjs.com/package/inquirer](https://www.npmjs.com/package/inquirer)
 
-- Stylish CLI prompts that are user-friendly, intuitive, and easy to create.
+- A collection of common interactive command line user interfaces.
 
 ### Chalk
 
