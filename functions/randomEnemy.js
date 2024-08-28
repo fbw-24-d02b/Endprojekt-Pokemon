@@ -1,8 +1,8 @@
 /**
- * Wählt zufällig einen Feind aus einer gegebenen Liste von Feinden aus.
+ * Selects a random enemy from a given list of enemies.
  *
- * @param {Array} enemy - Eine Liste von Feinden.
- * @returns {Object} - Ein zufällig ausgewählter Feind aus der Liste.
+ * @param {Array} enemy - A list of enemies.
+ * @returns {Object} - A randomly selected enemy from the list.
  */
 export const randomEnemy = (enemy) => {
   const numberOfEnemy = Math.floor(Math.random() * enemy.length);
